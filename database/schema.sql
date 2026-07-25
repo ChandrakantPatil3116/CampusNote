@@ -1,4 +1,5 @@
 create database campusnote;
+
 use campusnote;
 
 CREATE TABLE users (

@@ -1,6 +1,6 @@
 package com.campusnote.entity;
 
-public enum Role {
+public enum role {
     STUDENT,
     ADMIN
 }

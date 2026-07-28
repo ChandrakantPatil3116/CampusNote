@@ -23,6 +23,9 @@ public class Download {
     @Column(name = "download_date")
     private LocalDateTime downloadDate;
 
+    public Download() {
+    }
+
     //getter and setter methods
     public Integer getDownloadId() {
         return downloadId;

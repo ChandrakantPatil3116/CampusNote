@@ -1,4 +1,5 @@
 package com.campusnote.entity;
+import com.campusnote.entity.User;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 

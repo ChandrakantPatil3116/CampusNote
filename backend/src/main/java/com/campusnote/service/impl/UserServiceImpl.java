@@ -3,6 +3,8 @@ package com.campusnote.service.impl;
 import com.campusnote.dto.LoginRequest;
 import com.campusnote.dto.RegisterRequest;
 import com.campusnote.dto.UserResponse;
+import com.campusnote.entity.Role;
+import com.campusnote.entity.User;
 import com.campusnote.repository.UserRepository;
 import com.campusnote.service.UserService;
 import org.springframework.stereotype.Service;

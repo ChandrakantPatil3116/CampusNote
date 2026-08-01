@@ -28,7 +28,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse register(RegisterRequest request) {
-        return null;
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        }
+
+        User user = new User();
+
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+
+        user.setRole(Role.STUDENT);
+
+        User savedUser = userRepository.save(user);
+
+        UserResponse response = new UserResponse();
+
+        response.setUserId(savedUser.getUserId());
+        response.setName(savedUser.getName());
+        response.setEmail(savedUser.getEmail());
+        response.setRole(savedUser.getRole());
+        response.setCreatedAt(savedUser.getCreatedAt());
+
+        return response;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.campusnote.entity;
 import com.campusnote.entity.User;
+import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
@@ -23,6 +24,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

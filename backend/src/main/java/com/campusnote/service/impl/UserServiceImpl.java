@@ -20,7 +20,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse getUserById(Integer userId) {
-        return null;
+
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserResponse response = new UserResponse();
+
+        response.setUserId(user.getUserId());
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+        response.setRole(user.getRole());
+        response.setCreatedAt(user.getCreatedAt());
+
+        return response;
     }
 
     @Override

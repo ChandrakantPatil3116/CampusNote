@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse login(LoginRequest request) {
-        return null;
+        throw new UnsupportedOperationException("Login not implemented yet.");
     }
 
     @Override

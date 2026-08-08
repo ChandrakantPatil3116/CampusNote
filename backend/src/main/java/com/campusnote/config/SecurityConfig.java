@@ -16,29 +16,22 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Password hashing
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Security configuration
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http) throws Exception {
 
         http
-            // Disable CSRF for REST APIs
             .csrf(csrf -> csrf.disable())
-
-            // Don't create HTTP sessions
             .sessionManagement(session ->
                 session.sessionCreationPolicy(
                     SessionCreationPolicy.STATELESS
                 )
             )
-
-            // API authorization rules
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/api/auth/register",

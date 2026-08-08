@@ -1,5 +1,6 @@
 package com.campusnote.controller;
 import com.campusnote.dto.LoginRequest;
+import com.campusnote.dto.LoginResponse;
 import com.campusnote.dto.RegisterRequest;
 import com.campusnote.dto.UserResponse;
 import com.campusnote.service.UserService;
@@ -26,10 +27,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserResponse> login(
-            @RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(
+        @RequestBody LoginRequest request) {
 
-        UserResponse response = userService.login(request);
+        LoginResponse response =
+            userService.login(request);
 
         return ResponseEntity.ok(response);
     }

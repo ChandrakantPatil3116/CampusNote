@@ -40,7 +40,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse login(LoginRequest request) {
-        throw new UnsupportedOperationException("Login not implemented yet.");
+
+        User user = userRepository.findByEmail(request.getEmail())
+            .orElseThrow(() ->
+                new RuntimeException("Invalid email or password"));
+
+        if (!passwordEncoder.matches(
+            request.getPassword(),
+            user.getPassword())) {
+
+            throw new RuntimeException("Invalid email or password");
+        }
+
+        UserResponse response = new UserResponse();
+
+        response.setUserId(user.getUserId());
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+        response.setRole(user.getRole());
+        response.setCreatedAt(user.getCreatedAt());
+
+        return response;
     }
 
     @Override

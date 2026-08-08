@@ -43,13 +43,13 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(() ->
-                new RuntimeException("Invalid email or password"));
+                    new RuntimeException("Invalid email or password"));
 
         if (!passwordEncoder.matches(
             request.getPassword(),
             user.getPassword())) {
 
-            throw new RuntimeException("Invalid email or password");
+        throw new RuntimeException("Invalid email or password");
         }
 
         UserResponse response = new UserResponse();

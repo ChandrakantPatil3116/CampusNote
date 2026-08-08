@@ -9,16 +9,21 @@ import com.campusnote.repository.UserRepository;
 import com.campusnote.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.campusnote.dto.LoginResponse;
+import com.campusnote.security.JwtService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder,JwtService jwtService) {
+
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -39,17 +44,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(() ->
-                    new RuntimeException("Invalid email or password"));
+                new RuntimeException("Invalid email or password"));
 
         if (!passwordEncoder.matches(
             request.getPassword(),
             user.getPassword())) {
 
-        throw new RuntimeException("Invalid email or password");
+            throw new RuntimeException("Invalid email or password");
         }
 
         UserResponse response = new UserResponse();
@@ -60,7 +65,9 @@ public class UserServiceImpl implements UserService {
         response.setRole(user.getRole());
         response.setCreatedAt(user.getCreatedAt());
 
-        return response;
+        String token = jwtService.generateToken(user.getEmail());
+
+        return new LoginResponse(token, response);
     }
 
     @Override

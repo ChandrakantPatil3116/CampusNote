@@ -12,6 +12,83 @@ The project aims to encourage collaborative learning while providing a clean, re
 
 ---
 
+#Project Structure
+
+CampusNote/
+│
+├── backend/
+│   ├── pom.xml
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   │
+│   └── src/main/
+│       ├── java/com/campusnote/
+│       │   │
+│       │   ├── config/
+│       │   │   └── SecurityConfig.java
+│       │   │
+│       │   ├── controller/
+│       │   │   ├── AuthController.java
+│       │   │   ├── HomeController.java
+│       │   │   └── SubjectController.java
+│       │   │
+│       │   ├── dto/
+│       │   │   ├── RegisterRequest.java
+│       │   │   ├── LoginRequest.java
+│       │   │   ├── LoginResponse.java
+│       │   │   ├── UserResponse.java
+│       │   │   ├── NoteRequest.java
+│       │   │   ├── NoteResponse.java
+│       │   │   ├── CommentRequest.java
+│       │   │   └── RatingRequest.java
+│       │   │
+│       │   ├── entity/
+│       │   │   ├── User.java
+│       │   │   ├── Role.java
+│       │   │   ├── Subject.java
+│       │   │   ├── Note.java
+│       │   │   ├── Bookmark.java
+│       │   │   ├── Comment.java
+│       │   │   ├── Download.java
+│       │   │   └── Rating.java
+│       │   │
+│       │   ├── repository/
+│       │   │   ├── UserRepository.java
+│       │   │   ├── SubjectRepository.java
+│       │   │   ├── NoteRepository.java
+│       │   │   ├── BookmarkRepository.java
+│       │   │   ├── CommentRepository.java
+│       │   │   ├── DownloadRepository.java
+│       │   │   └── RatingRepository.java
+│       │   │
+│       │   ├── service/
+│       │   │   ├── UserService.java
+│       │   │   ├── SubjectService.java
+│       │   │   └── impl/
+│       │   │       ├── UserServiceImpl.java
+│       │   │       └── SubjectServiceImpl.java
+│       │   │
+│       │   ├── security/
+│       │   │   └── JwtService.java
+│       │   │
+│       │   └── exception/
+│       │
+│       └── resources/
+│           └── application.properties
+│
+├── database/
+│   └── schema.sql
+│
+├── frontend/
+│   └── index.html
+│
+├── docs/
+│   └── SRS.md
+│
+└── README.md
+
+---
+
 ## ✨ Features
 
 ### Upcoming Features

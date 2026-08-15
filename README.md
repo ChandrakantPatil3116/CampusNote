@@ -59,7 +59,6 @@ The project aims to encourage collaborative learning while providing a clean, re
 
 ### Database
 
-- MongoDB
 - MySQL
 
 ### Authentication

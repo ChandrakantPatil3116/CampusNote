@@ -18,12 +18,16 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    public SecurityConfig(
+            JwtAuthenticationFilter jwtAuthenticationFilter) {
+
+        this.jwtAuthenticationFilter =
+                jwtAuthenticationFilter;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 
@@ -32,34 +36,33 @@ public class SecurityConfig {
             HttpSecurity http) throws Exception {
 
         http
-            // Disable CSRF because this is a REST API
-            .csrf(csrf -> csrf.disable())
+                // REST API does not use CSRF tokens
+                .csrf(csrf -> csrf.disable())
 
-            // Do not create HTTP sessions
-            .sessionManagement(session ->
-                session.sessionCreationPolicy(
-                    SessionCreationPolicy.STATELESS
+                // JWT authentication is stateless
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(
+                                SessionCreationPolicy.STATELESS
+                        )
                 )
-            )
 
-            // Endpoint authorization
-            .authorizeHttpRequests(auth -> auth
+                .authorizeHttpRequests(auth -> auth
 
-                // Authentication endpoints are public
-                .requestMatchers(
-                    "/api/auth/register",
-                    "/api/auth/login"
-                ).permitAll()
+                        // Public authentication endpoints
+                        .requestMatchers(
+                                "/api/auth/register",
+                                "/api/auth/login"
+                        ).permitAll()
 
-                // All other endpoints require authentication
-                .anyRequest().authenticated()
-            )
+                        // Everything else requires authentication
+                        .anyRequest().authenticated()
+                )
 
-            // Run JWT filter before Spring's username/password filter
-            .addFilterBefore(
-                jwtAuthenticationFilter,
-                UsernamePasswordAuthenticationFilter.class
-            );
+                // JWT filter runs before username/password authentication
+                .addFilterBefore(
+                        jwtAuthenticationFilter,
+                        UsernamePasswordAuthenticationFilter.class
+                );
 
         return http.build();
     }

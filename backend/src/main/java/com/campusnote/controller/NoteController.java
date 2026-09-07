@@ -50,42 +50,35 @@ public class NoteController {
         );
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{noteId}")
     public ResponseEntity<NoteResponse> getNoteById(
-            @PathVariable Integer id) {
+            @PathVariable Integer noteId) {
 
         return ResponseEntity.ok(
-                noteService.getNoteById(id)
+                noteService.getNoteById(noteId)
         );
     }
 
     @GetMapping("/subject/{subjectId}")
-    public ResponseEntity<List<NoteResponse>>
-    getNotesBySubject(
+    public ResponseEntity<List<NoteResponse>> getNotesBySubject(
             @PathVariable Integer subjectId) {
 
         return ResponseEntity.ok(
-                noteService.getNotesBySubject(
-                        subjectId
-                )
+                noteService.getNotesBySubject(subjectId)
         );
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<NoteResponse>>
-    getNotesByUser(
+    public ResponseEntity<List<NoteResponse>> getNotesByUser(
             @PathVariable Integer userId) {
 
         return ResponseEntity.ok(
-                noteService.getNotesByUser(
-                        userId
-                )
+                noteService.getNotesByUser(userId)
         );
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<NoteResponse>>
-    searchNotes(
+    public ResponseEntity<List<NoteResponse>> searchNotes(
             @RequestParam String keyword) {
 
         return ResponseEntity.ok(
@@ -93,22 +86,24 @@ public class NoteController {
         );
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{noteId}")
     public ResponseEntity<NoteResponse> updateNote(
-            @PathVariable Integer id,
+            @PathVariable Integer noteId,
             @Valid @RequestBody NoteRequest request) {
 
         return ResponseEntity.ok(
-                noteService.updateNote(id, request)
+                noteService.updateNote(noteId, request)
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{noteId}")
     public ResponseEntity<Void> deleteNote(
-            @PathVariable Integer id) {
+            @PathVariable Integer noteId) {
 
-        noteService.deleteNote(id);
+        noteService.deleteNote(noteId);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }
